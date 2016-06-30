@@ -1,0 +1,239 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    /*background-color: #eee;*/
+    /**/ background: url('img/backgroundImg.png') no-repeat center center fixed;
+    font-family: 'Roboto', sans-serif;
+}
+
+    body#loginPage {
+        background-image: linear-gradient(117deg,#06274a,#192e3c 43%,#000a10);
+    }
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.kpis {
+}
+
+.kpis, .approached, .active, .stats {
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+    .kpis img {
+        width: 100%;
+    }
+
+.stats {
+}
+
+.title {
+    background-color: #ffffff;
+    height: 200px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    //border: 1px solid lightgray;
+    border-radius: 7px;
+}
+
+    .title BI {
+        font-weight: bold;
+    }
+
+.vacancySelected {
+    font-weight: bold;
+    font-size: large;
+}
+
+.BI {
+    font-weight: bold;
+    font-size: large;
+}
+
+select:hover {
+    cursor: pointer;
+    border: 1px solid gray;
+}
+
+.navbar {
+    background: #1b293c;
+    color: #ffffff;
+}
+
+.dateFields input {
+    width: 50%;
+}
+
+.container, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.stats h4 span, .active h4 span, .approached h4 span, .kpis h4 {
+    color: #889eb0;
+}
+
+.kpis h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.stats h4 strong, .active h4 strong, .approached h4 strong {
+    color: #496174;
+}
+
+.stats h3, .active h3, .kpis h3, .BI, .vacancySelected, .title strong, .approached h3 {
+    color: #496174;
+}
+
+@media screen and (min-width: 1280px) {
+    .col-lg-4 {
+        width: 32.5%;
+    }
+
+    .stats, .active {
+        margin-right: 12px;
+    }
+
+    .stats, .kpis, .activeStat {
+        height: 670px;
+    }
+
+        .stats:hover, .active:hover, .kpis:hover, .approached:hover, .title:hover {
+            transform: scale(1);
+            box-shadow: 0 0 10px #c4c4c4;
+            transition: .3s ease-in-out;
+        }
+
+    .active {
+        margin-bottom: 22px;
+    }
+
+    .approached {
+        margin-top: 15px;
+        display: none;
+    }
+
+    .login-form {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        border: none;
+        background: #fff;
+        padding: 5%;
+        margin-top: 5%;
+        text-align: center;
+        margin-bottom: 5%;
+    }
+
+    .register-form {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        border: none;
+        background: #fff;
+        padding: 5%;
+        margin-top: 5%;
+        text-align: center;
+        margin-bottom: 5%;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .title {
+        height: 600px;
+    }
+
+    .stats, .kpis, .activeStat {
+        width: 95%;
+    }
+
+    .stats, .active {
+        margin-right: 0px;
+    }
+
+    .approached {
+        display: none;
+    }
+
+    .login-form {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        border: none;
+        background: #fff;
+        padding: 5%;
+        margin-top: 5%;
+        text-align: center;
+        margin-bottom: 5%;
+    }
+
+    .register-form {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        border: none;
+        background: #fff;
+        padding: 5%;
+        margin-top: 5%;
+        text-align: center;
+        margin-bottom: 5%;
+    }
+}
+
+.username-div, .password-div {
+    width: 100%;
+}
+
+.login-img {
+    width: 30%;
+}
+
+.login-text {
+    margin-top: 0.2%;
+}
+
+#loader-wrapper .loader-section {
+    position: fixed;
+    top: 0;
+    width: 51%;
+    height: 100%;
+    background: url(img/giff.gif) no-repeat center center fixed;
+    z-index: 1000;
+}
+
+    #loader-wrapper .loader-section.section-left {
+        left: 0;
+    }
+
+    #loader-wrapper .loader-section.section-right {
+        right: 0;
+    }
+
+#loader {
+    z-index: 1001; /* anything higher than z-index: 1000 of .loader-section */
+}
+
+.dataContent {
+    display: none;
+}
+
+.navbar {
+    display: none;
+}

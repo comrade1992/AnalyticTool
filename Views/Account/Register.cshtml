@@ -1,0 +1,60 @@
+﻿@model AnalyticTool.Models.UserAccount
+
+@{
+    ViewBag.Title = "Register";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal register-form">
+        <h4>Register</h4>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label username-div">
+            <label class="mdl-textfield__label" for="Username">Username</label>
+            <input class="mdl-textfield__input" data-val="true" data-val-required="Username is required!" id="Username" name="Username" type="text" value="">
+            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label username-div">
+            <label class="mdl-textfield__label" for="Email">Email</label>
+            <input class="mdl-textfield__input" data-val="true" data-val-email="The Email field is not a valid e-mail address." data-val-required="Email is required!" id="Email" name="Email" type="email" value="">
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label username-div">
+            <label class="mdl-textfield__label" for="Name">Name</label>
+            <input class="mdl-textfield__input" data-val="true" data-val-required="Name is required!" id="Name" name="Name" type="text" value="">
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label username-div">
+            <label class="mdl-textfield__label" for="UserPassword">UserPassword</label>
+            <input class="mdl-textfield__input" data-val="true" data-val-required="Password is required!" id="UserPassword" name="UserPassword" type="password" value="">
+            @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label username-div">
+            <label class="mdl-textfield__label" for="ConfirmPassword">ConfirmPassword</label>
+            <input class="mdl-textfield__input" data-val="true" data-val-equalto="Password is required!" data-val-equalto-other="*.UserPassword" id="ConfirmPassword" name="ConfirmPassword" type="password" value="">
+            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent col-md-7" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+    <script src="~/Content/js/app/login.js"></script>
+}
+@section Styles{
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
+}

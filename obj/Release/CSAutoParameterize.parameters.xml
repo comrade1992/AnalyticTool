@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\v11.0;;AttachDbFilename=|DataDirectory|\aspnet-AnalyticTool-20160516111218.mdf;Initial Catalog=aspnet-AnalyticTool-20160516111218;Integrated Security=True;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Metodi\ Tosheski\\Documents\\Visual\ Studio\ 2015\\Projects\\AnalyticTool\\AnalyticTool\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="AnalyticTool.Models.AnalyticDB-Web.config Connection String" description="AnalyticTool.Models.AnalyticDB Connection String used in web.config by the application to access the database." defaultValue="AnalyticTool.Models.AnalyticDB_ConnectionString" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Metodi\ Tosheski\\Documents\\Visual\ Studio\ 2015\\Projects\\AnalyticTool\\AnalyticTool\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='AnalyticTool.Models.AnalyticDB']/@connectionString" />
+  </parameter>
+</parameters>

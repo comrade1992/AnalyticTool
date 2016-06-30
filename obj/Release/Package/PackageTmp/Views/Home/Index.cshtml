@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div ng-app="AnalyticTool" class="container">
+    <div ng-controller="DataCtrl">
+        <div class="col-lg-12">
+            <br />
+            <div class="col-lg-12 title">
+                <div class="col-lg-3">
+                    <span class="BI">BI Dashboard</span><br /><br />
+                    <span><strong>Contact person: </strong></span><br /><br />
+                    <button class="btn btn-default" ng-click="downloadPDF()"><icon class="glyphicon glyphicon-file"></icon> Export in pdf</button>
+                </div>
+                <div class="col-lg-4">
+                    <span class="vacancySelected">Client: </span><br />
+                    <span class="vacancySelected">Vacancy: {{selectedOption.vacancy}}</span><br />
+                    <span class="vacancySelected">Total time: {{totalTime}} hours</span><br />
+                    <span class="vacancySelected">Search duration: {{searchingDuration}} hours</span><br />
+                    <span class="vacancySelected">Connect duration: {{connectDuration}} hours</span>
+                </div>
+                <div class="col-lg-5">
+                    <select class="form-control"
+                            ng-model="selectedOption"
+                            ng-change="metricCalculations(selectedOption.fileName)"   
+                            ng-options="option.vacancy for option in options track by option.fileName">
+                        <option value="">Select vacancy...</option>
+                    </select>
+                    <div class="row col-lg-12 dateFields">
+                        <span class="col-lg-3"><strong>From:</strong></span>
+                        <span class="col-lg-6 col-lg-offset-3"><strong>To:</strong></span>
+                        <input class="form-control col-lg-6" ng-model="dateFrom" ng-change="dateChanged()" type="date" />
+                        <input class="form-control col-lg-6" ng-model="dateTo"  ng-change="dateChanged()"type="date" />
+                    </div>
+                    <span>Start date: <strong>{{firstCandidateDate | date:'longDate'}} </strong></span><br />
+                    <span>Days passed (start - today): <strong>{{daysPassed}}</strong></span> <br />
+                    <span>First candidate introduced: <strong>{{firstIntroducedDate | date: 'longDate'}}</strong></span><br />
+                    <span>Days passed (mapped - introduced): <strong>{{daysPassedToFirstIntro}} </strong></span>
+                </div>
+            </div>
+            <div class="stats col-lg-4">
+                <h3><strong>Total overview</strong></h3>
+                <hr />
+                <h4>
+                    <strong id="allContacts"></strong> <!-- {{allContacts}} --> <span>Total number</span>        
+                </h4>
+                <h4>
+                    <!-- <span id="approachCandidatesNum"></span> --><strong>{{approachCandidatesNum}}</strong> <span>Approach</span>
+                </h4>
+                <h4>
+                    <!-- <span id="lastContactNum"></span> --> <strong>{{responseCandidatesNum}} </strong> <span>Response</span>
+                </h4>
+                <h4>
+                    <!--<span id="passiveCandidatesNum"></span> --> <strong>{{passiveCandidatesNum}}</strong> <span>Passive</span>
+                </h4>
+                <h4>
+                    <!-- <span id="filteringCandidatesNum"></span> --> <strong> {{filteringCandidatesNum}}</strong> <span>Filtering</span>
+                </h4>
+                <h4>
+                    <!-- <span id="interestedCandidatesNum"></span> --> <strong> {{interestedCandidatesNum}}</strong> <span>Interested</span>
+                </h4>
+                <h4>
+                    <!-- <span id="tomatoTalentCandidatesNum"></span> --> <strong> {{tomatoTalentCandidatesNum}}</strong> <span>Tomato talent interviewed</span>
+                </h4>
+                <h4>
+                    <!--<span id="notInterestedNum"></span> --> <strong> {{notInterestedNum}}</strong> <span>Not interested</span>
+                </h4>
+                <canvas id="barChart" width="400" height="400"></canvas>
+            </div>
+            <div class="col-lg-4 active activeStat">
+                <h3><strong>Current status</strong></h3>
+                <hr />
+                <h4><!--<span id="activeCandidatesNum"></span> --> <strong> {{activeCandidatesNum}} </strong> <span>Active</span></h4>
+                <h4><!--<span id="initialInterestedNum"></span> --> <strong> {{initialInterestedNum}} </strong> <span>Initial interest</span></h4>
+                <h4><!--<span id="tomatoTalentCurrentNum"></span> --> <strong> {{tomatoTalentCurrentNum}} </strong> <span>Interview scheduled</span></h4>
+                <h4><!--<span id="introducedCandidatesNum"></span> --> <strong> {{introducedCandidatesNum}} </strong> <span>Introduced</span></h4>
+                <canvas id="active" width="400" height="400"></canvas>
+            </div>
+            <div class="col-lg-4 kpis" id="kpis">
+                <h3><strong>KPI's</strong></h3>
+                <hr />
+                <div class="FWeeks" id="">
+                    <h3>0-2 Weeks</h3>
+                    <h4>Candidates mapped</h4>
+                    <uib-progressbar class="progress-striped active" max="100" value="allContacts" type="{{typeMapped}}">{{allContacts}} / 100 {{type}} <i></i></uib-progressbar>
+                </div>
+                <div class="kpi2">
+                    <h3><strong>2-4 Weeks</strong></h3>
+                    <img src="~/Content/img/kpi2.png" ng-show="!kpi2Available" />
+                    <div ng-show="kpi2Available">
+                        <h4>Approached</h4>
+                        <uib-progressbar class="progress-striped active" max="90" value="approachedPerc" type="{{typeApproached}}">{{approachedPerc}} / 90% {{type}} <i></i></uib-progressbar>
+                        <h4>Reply</h4>
+                        <uib-progressbar class="progress-striped active" max="60" value="responseRate" type="{{typeResponse}}">{{responseRate}} / 60% {{type}} <i></i></uib-progressbar>
+                        <h4>Interested</h4>
+                        <uib-progressbar class="progress-striped active" max="30" value="interestedPerc" type="{{typeInterested}}">{{interestedPerc}} / 30% {{type}} <i></i></uib-progressbar>
+                    </div>
+                </div>
+                <div class="kpi3">
+                    <h3>4-6 Weeks</h3>
+                    <img src="~/Content/img/kpi3.jpg" ng-show="!kpi3Available" />
+                    <div ng-show="kpi3Available">
+                        <h4>Tomato interviews</h4>
+                        <uib-progressbar class="progress-striped active" max="15" value="tomatoTalentCandidatesNum" type="{{typeTomato}}">{{tomatoTalentCandidatesNum}} / 15 {{type}} <i></i></uib-progressbar>
+                    </div>
+                </div>
+                <div class="kpi4">
+                    <h3>6-8 Weeks</h3>
+                    <img src="~/Content/img/kpi4.jpg" ng-show="!kpi4Available" />
+                    <div ng-show="kpi4Available">
+                        <h4>Introduced</h4>
+                        <uib-progressbar class="progress-striped active" max="10" value="introducedCandidatesNum" type="{{typeIntroduced}}">{{introducedCandidatesNum}} / 10 {{type}} <i ng-show=""></i></uib-progressbar>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!----><div class="col-lg-12">
+            <div class="col-lg-4 approached">
+                <h3><strong>Candidate response</strong></h3>
+                <h4><strong>{{approachCandidatesNum}}</strong> <span>Approach</span></h4>
+                <h4><strong>{{interestedCandidatesNum}}</strong> <span>Interested</span></h4>
+                <h4><strong>{{notInterestedNum}}</strong> <span>Not interested</span></h4>
+                <h4><strong>{{passiveCandidatesNum}}</strong> <span>Passive</span></h4>
+                <canvas id="approached" width="400" height="400"></canvas>
+            </div>
+            <!-- <div class="col-lg-4">
+                   <h3>Approach</h3>
+                   <canvas id="approach" width="400" height="400"></canvas>
+               </div>
+               <div class="col-lg-3">
+                   <h3>Engaged</h3>
+                   <canvas id="engaged" width="400" height="400"></canvas>
+               </div>-->
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/Content/js/app/app.js"></script>
+    <script src="~/Content/js/app/controllers/dataController.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular-route.min.js"></script>
+    <script src="~/Scripts/jsPDF-1.2.60/dist/jspdf.min.js"></script>
+}
